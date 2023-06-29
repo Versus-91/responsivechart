@@ -1,0 +1,9 @@
+body {
+    height: 100%;
+}
+
+/* YOUR CSS CODE GOES HERE */
+#chart-container {
+      width: 100%;
+      height: 400px;
+}
