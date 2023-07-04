@@ -35,10 +35,11 @@ Other energy sources,25.4,4.2,24.8,4.3,24.5,4.2,23.8,4.1`;
           d["2022 (Billion kWh)"]
       );
       function updateChart() {
+
         const margin = { top: 20, right: 30, bottom: 40, left: 90 };
         var parentDiv = document.getElementById("parent-ctr");
         // let width = 500 - margin.left - margin.right;
-        const width = parentDiv.clientWidth - 100;
+        // let width = parentDiv.clientWidth - 100;
         let height = 500 - margin.top - margin.bottom;
         const windowWidthEm =
           window.innerWidth /
@@ -49,6 +50,7 @@ Other energy sources,25.4,4.2,24.8,4.3,24.5,4.2,23.8,4.1`;
         d3.select("#chart-container").selectAll("*").remove();
 
         if (windowWidthEm >= 70) {
+          width = 70 * 10
           // State 1: Default state with full spacing between bars
           // Create the SVG container
           const svg = d3
@@ -106,6 +108,8 @@ Other energy sources,25.4,4.2,24.8,4.3,24.5,4.2,23.8,4.1`;
             .attr("text-anchor", "middle")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 50) {
+          console.log(windowWidthEm);
+          width = 50 * 10
           console.log("state 2");
           // State 2: Reduce spacing between bars, reduce bar width, rotate bar labels ~25°
           // Create the SVG container
@@ -121,7 +125,7 @@ Other energy sources,25.4,4.2,24.8,4.3,24.5,4.2,23.8,4.1`;
           const x = d3
             .scaleBand()
             .range([0, width])
-            .padding(0.2)
+            .padding(0.1)
             .domain(data.map((d) => d["Energy sources"]));
 
           // Set up the y-scale
@@ -144,7 +148,7 @@ Other energy sources,25.4,4.2,24.8,4.3,24.5,4.2,23.8,4.1`;
 
           // Add the y-axis
           svg.append("g").call(d3.axisLeft(y));
-          barWidth = 100;
+          barWidth = 60;
           // Add the bars
           svg
             .selectAll(".bar")
