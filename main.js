@@ -18,7 +18,9 @@ window.onload = () => {
           d["2022 (Billion kWh)"]
       );
       function updateChart() {
-        const margin = { top: 20, right: 30, bottom: 40, left: 90 };
+        let width = 0
+        let barWidth = 0
+        const margin = { top: 20, right: 30, bottom: 65, left: 90 };
         var parentDiv = document.getElementById("parent-ctr");
         // let width = 500 - margin.left - margin.right;
         // let width = parentDiv.clientWidth - 100;
@@ -154,6 +156,7 @@ window.onload = () => {
             .attr("class", "bar-label")
             .attr("x", (d) => x(d["Energy sources"]) + x.bandwidth() / 2)
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]) - 5)
+            .style("font-size", "12px")
             .attr("text-anchor", "middle")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 40) {
@@ -222,6 +225,7 @@ window.onload = () => {
             .attr("x", (d) => x(d["Energy sources"]) + x.bandwidth() / 2)
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]) - 5)
             .attr("text-anchor", "middle")
+            .style("font-size", "10px")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 30) {
           console.log("state 4");
@@ -288,6 +292,9 @@ window.onload = () => {
             .attr("x", (d) => x(d["Energy sources"]) + x.bandwidth() / 2)
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]) - 5)
             .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-60)")
+
+            .style("font-size", "8px")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 20) {
           console.log("s5");
@@ -316,7 +323,6 @@ window.onload = () => {
           // Add the y-axis
           svg.append("g")
           .style("font-size", "8px")
-    
           .call(d3.axisLeft(y));
 
           // Add the x-axis
