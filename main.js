@@ -77,7 +77,7 @@ window.onload = () => {
             .attr("x", (d) => x(d["Energy sources"]))
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]))
             .attr("width", x.bandwidth())
-            .attr("fill", "steelblue")
+            .attr("fill", "#69b3a2")
             .attr("height", (d) => height - y(+d["2022 (Billion kWh)"]));
 
           // Add labels to the bars
@@ -90,9 +90,9 @@ window.onload = () => {
             .attr("x", (d) => x(d["Energy sources"]) + x.bandwidth() / 2)
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]) - 5)
             .attr("text-anchor", "middle")
+            .style("font-size", "12px")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 50) {
-          console.log(windowWidthEm);
           width = 50 * 10;
           console.log("state 2");
           // State 2: Reduce spacing between bars, reduce bar width, rotate bar labels ~25°
@@ -146,7 +146,7 @@ window.onload = () => {
             )
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]))
             .attr("width", barWidth)
-            .attr("fill", "steelblue")
+            .attr("fill", "#69b3a2")
             .attr("height", (d) => height - y(+d["2022 (Billion kWh)"]));
           svg
             .selectAll(".bar-label")
@@ -161,7 +161,6 @@ window.onload = () => {
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 40) {
           width = 40 * 10;
-          console.log("state 3");
           // State 2: Reduce spacing between bars, reduce bar width, rotate bar labels ~25°
           // Create the SVG container
           const svg = d3
@@ -196,7 +195,7 @@ window.onload = () => {
             .attr("dy", ".15em")
             .attr("transform", "rotate(-25)")
             .style("font-size", "10px")
-            .style("padding-bottom", "10px");
+            .style("padding-bottom", "15px");
 
           // Add the y-axis
           svg.append("g").call(d3.axisLeft(y));
@@ -214,7 +213,7 @@ window.onload = () => {
             )
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]))
             .attr("width", barWidth)
-            .attr("fill", "steelblue")
+            .attr("fill", "#69b3a2")
             .attr("height", (d) => height - y(+d["2022 (Billion kWh)"]));
           svg
             .selectAll(".bar-label")
@@ -228,7 +227,6 @@ window.onload = () => {
             .style("font-size", "10px")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 30) {
-          console.log("state 4");
           width = 30 * 10;
           // State 2: Reduce spacing between bars, reduce bar width, rotate bar labels ~25°
           // Create the SVG container
@@ -236,7 +234,7 @@ window.onload = () => {
             .select("#chart-container")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("height", height + margin.top + (margin.botto + 20))
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -260,13 +258,15 @@ window.onload = () => {
             .call(xAxis)
             .selectAll("text")
             .style("text-anchor", "end")
-            .attr("dx", "-.5em")
-            .attr("dy", ".15em")
+            .attr("dx", "-1em")
+            .attr("dy", "-1em")
             .attr("transform", "rotate(-90)")
             .style("font-size", "8px");
 
           // Add the y-axis
-          svg.append("g").call(d3.axisLeft(y));
+          svg.append("g")
+           .style("font-size", "8px")
+          .call(d3.axisLeft(y));
           barWidth = 40;
           // Add the bars
           svg
@@ -281,7 +281,7 @@ window.onload = () => {
             )
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]))
             .attr("width", barWidth)
-            .attr("fill", "steelblue")
+            .attr("fill", "#69b3a2")
             .attr("height", (d) => height - y(+d["2022 (Billion kWh)"]));
           svg
             .selectAll(".bar-label")
@@ -292,19 +292,16 @@ window.onload = () => {
             .attr("x", (d) => x(d["Energy sources"]) + x.bandwidth() / 2)
             .attr("y", (d) => y(+d["2022 (Billion kWh)"]) - 5)
             .attr("text-anchor", "middle")
-            .attr("transform", "rotate(-60)")
-
             .style("font-size", "8px")
             .text((d) => d["2022 (Billion kWh)"]);
         } else if (windowWidthEm >= 20) {
-          console.log("s5");
           width = 30 * 9
           // State 5: Switch to horizontal bars, reduce spacing between bars, reduce bar width, rotate bar labels ~60°, reduce font size of bar labels
           d3.select("#chart-container").selectAll("*").remove();
           const svg = d3
             .select("#chart-container")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
+            .attr("width", (width + margin.left + margin.right))
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -342,8 +339,8 @@ window.onload = () => {
             .attr("y", (d) => y(d["Energy sources"]))
             .attr("x", 0)
             .attr("width", (d) => x(+d["2022 (Billion kWh)"]))
-            .attr("fill", "steelblue")
-            .attr("height", y.bandwidth());
+            .attr("fill", "#69b3a2")
+            .attr("height", y.bandwidth() - 10);
 
           // Add labels to the bars
           svg
@@ -353,7 +350,7 @@ window.onload = () => {
             .append("text")
             .attr("class", "bar-label")
             .attr("y", (d) => y(d["Energy sources"]) + y.bandwidth() / 2)
-            .attr("x", (d) => x(+d["2022 (Billion kWh)"]) + 5)
+            .attr("x", (d) => x(+d["2022 (Billion kWh)"])+ 2)
             .attr("text-anchor", "start")
             .text((d) => d["2022 (Billion kWh)"])
             .style("font-size", "8px");
